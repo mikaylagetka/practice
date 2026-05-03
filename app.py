@@ -397,7 +397,7 @@ with col_right:
         .groupby(["Decade", "Primary_Genre"])
         .agg(Avg_Gross=("Gross_USD", "mean"))
         .reset_index()
-        .sort_values("Decade")
+        .sort_values("Decade", key=lambda x: x.str.extract(r"(\d+)")[0].astype(int))
     )
     decade_genre_data["Avg_Gross_M"] = decade_genre_data["Avg_Gross"] / 1_000_000
 
