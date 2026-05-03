@@ -520,44 +520,29 @@ st.markdown('<div class="section-header">Key Findings</div>', unsafe_allow_html=
 
 st.markdown("""
 <div class="insight-box">
-    <strong>1. High ratings and high box office gross belong to entirely different genres.</strong>
-    Across all 999 films, Crime (avg 8.02) and Drama (avg 7.96) earn the strongest average IMDB ratings,
-    while Action ($142M avg gross) and Animation ($128M) generate 3–4x more revenue than either.
-    Drama is the most represented genre in the dataset with 289 films, yet its average gross of $38.7M
-    ranks near the bottom. The genres that audiences rate most favorably are consistently not the ones
-    that produce the highest commercial returns — studios pursuing prestige and studios pursuing revenue
-    are optimizing for different outcomes.
+    <strong>Finding 1 — Crime tops audience ratings, but barely.</strong>
+    Crime leads with an 8.02 IMDB average, yet every major genre falls within a 0.12-point band (7.90–8.02).
+    High audience ratings are broadly distributed, not genre-specific.
 </div>
 
 <div class="insight-box">
-    <strong>2. Box office revenue grew 57x over a century of cinema, but audience ratings stayed nearly flat.</strong>
-    Average gross across Top 1000 films rose from $1.8M in the 1920s to $103.7M in the 2010s.
-    Over that same span, average IMDB ratings moved only from 7.97 to 8.13 — a difference of less than
-    0.2 points across 90 years. The 1920s, 1940s, and 1950s actually post higher average ratings than
-    the commercially dominant 2000s and 2010s, indicating that larger budgets and global distribution
-    have not translated into better-received films. Audiences apply a remarkably consistent quality
-    standard regardless of era or production scale.
+    <strong>Finding 2 — Action earns 4× Drama's box office despite near-equal ratings.</strong>
+    Action ($142M avg) and Drama ($38.7M avg) sit just 0.01 points apart on IMDB, yet the revenue gap is enormous.
+    Animation ($128M) similarly towers over critically admired genres like Crime and Mystery commercially.
 </div>
 
 <div class="insight-box">
-    <strong>3. Longer films earn higher ratings, but critics and audiences still measure quality differently.</strong>
-    The correlation between Metacritic scores and IMDB ratings across all 999 films is just 0.27,
-    meaning critical and audience assessments frequently diverge. Box office gross is nearly uncorrelated
-    with Metacritic (-0.03) and only weakly tied to IMDB ratings (0.10). Runtime is a more consistent
-    signal: films rated above 8.5 average 151 minutes, compared to 129 minutes for films rated 8.0–8.5
-    and 119 minutes for those below 8.0. Films that demand more viewing time are rewarded by audiences
-    even when critics do not score them proportionally higher.
+    <strong>Finding 3 — Box office power shifted decisively from Drama → Action, and never reversed.</strong>
+    Drama led through the 1940s, Horror briefly spiked in the 1970s (Jaws, Halloween), then Action took over
+    in the 1980s and has grown 94% since from $104M/film to $202M in the 2010s. Animation's rise in the
+    1990s–2000s is the only serious challenge to Action's commercial dominance.
 </div>
 
 <div class="insight-box">
-    <strong>4. Audience engagement — not critic scores — is the strongest predictor of both rating and revenue.</strong>
-    Vote count has the highest correlation with IMDB rating (r = 0.50) of any variable in the dataset,
-    and also the strongest relationship with box office gross (r = 0.57). Films that draw large, engaged
-    audiences sustain higher scores over time regardless of critical reception. This pattern is visible
-    at the director level too: the three most prolific directors in the Top 1000 — Alfred Hitchcock
-    (14 films), Steven Spielberg (13), and Hayao Miyazaki (11) — all maintain average ratings above 8.0,
-    showing that sustained audience trust, built over many films, is the rarest and most durable form
-    of success in the dataset.
+    <strong>Finding 4 — Ratings prestige migrated from Westerns/Crime to Animation and back.</strong>
+    Westerns commanded the highest average ratings in the 1960s, Crime dominated most other decades, but
+    Animation briefly seized the top-rated position in the 2000s (7.95 avg) with the Pixar golden era effect
+    before Crime reclaimed it in the 2010s.
 </div>
 """, unsafe_allow_html=True)
 
