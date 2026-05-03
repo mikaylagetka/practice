@@ -401,6 +401,11 @@ with col_right:
     )
     decade_genre_data["Avg_Gross_M"] = decade_genre_data["Avg_Gross"] / 1_000_000
 
+    sorted_decades = sorted(
+        decade_genre_data["Decade"].unique(),
+        key=lambda d: int(d.replace("s", ""))
+    )
+
     fig_line = px.line(
         decade_genre_data,
         x="Decade",
@@ -410,6 +415,7 @@ with col_right:
         labels={"Decade": "Decade", "Avg_Gross_M": "Avg Gross (USD Millions)", "Primary_Genre": "Genre"},
         markers=True,
         color_discrete_sequence=CHART_COLORS,
+        category_orders={"Decade": sorted_decades},
     )
     fig_line.update_traces(
         marker=dict(size=7, line=dict(color="#FFFFFF", width=1.5)),
@@ -521,13 +527,13 @@ st.markdown("""
 <div class="insight-box">
     <strong>Finding 1 — Crime tops audience ratings, but barely.</strong>
     Crime leads with an 8.02 IMDB average, yet every major genre falls within a 0.12-point band (7.90–8.02).
-    High audience ratings are broadly distributed, not genre-specific.
+    High audience ratings are broadly distributed, not genre-specific. This finding excluded the Western genre that did not meet a minimum threshold of 5+ films to help ensure findings remain statistically significant.
 </div>
 
 <div class="insight-box">
     <strong>Finding 2 — Action earns 4× Drama's box office despite near-equal ratings.</strong>
     Action ($142M avg) and Drama ($38.7M avg) sit just 0.01 points apart on IMDB, yet the revenue gap is enormous.
-    Animation ($128M) similarly towers over critically admired genres like Crime and Mystery commercially.
+    Animation ($128M) similarly towers over critically admired genres like Crime and Mystery commercially. This finding similarly excluded the Family genre that did not meet the minimum 5+ films threshold.
 </div>
 
 <div class="insight-box">
