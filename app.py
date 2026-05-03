@@ -187,7 +187,7 @@ all_genres = sorted(df_raw["Primary_Genre"].dropna().unique())
 selected_genres = st.sidebar.multiselect(
     "Primary Genre",
     options=all_genres,
-    default=["Drama", "Action", "Comedy", "Crime", "Biography", "Animation", "Thriller"],
+    default=["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "Horror", "Mystery", "Thriller", "Western"],
 )
 
 # Filter 3: Minimum IMDB rating slider
