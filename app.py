@@ -391,34 +391,28 @@ with col_left:
     st.plotly_chart(fig_dual, use_container_width=True)
 
 with col_right:
-    # CHART 2: Average Gross by Decade (Line Chart)
-    decade_data = (
+    # CHART 2: Average Gross by Decade per Genre (Multi-line Chart)
+    decade_genre_data = (
         df_filtered.dropna(subset=["Gross_USD"])
-        .groupby("Decade")
-        .agg(
-            Avg_Gross=("Gross_USD", "mean"),
-            Film_Count=("Gross_USD", "count"),
-        )
+        .groupby(["Decade", "Primary_Genre"])
+        .agg(Avg_Gross=("Gross_USD", "mean"))
         .reset_index()
         .sort_values("Decade")
     )
-    decade_data["Avg_Gross_M"] = decade_data["Avg_Gross"] / 1_000_000
+    decade_genre_data["Avg_Gross_M"] = decade_genre_data["Avg_Gross"] / 1_000_000
 
     fig_line = px.line(
-        decade_data,
+        decade_genre_data,
         x="Decade",
         y="Avg_Gross_M",
+        color="Primary_Genre",
         title="Average Box Office Gross by Decade",
-        labels={"Decade": "Decade", "Avg_Gross_M": "Avg Gross (USD Millions)"},
+        labels={"Decade": "Decade", "Avg_Gross_M": "Avg Gross (USD Millions)", "Primary_Genre": "Genre"},
         markers=True,
-        text="Avg_Gross_M",
+        color_discrete_sequence=CHART_COLORS,
     )
     fig_line.update_traces(
-        line_color="#1A4A7A",
-        marker=dict(color="#B8860B", size=9, line=dict(color="#FFFFFF", width=2)),
-        texttemplate="$%{text:.0f}M",
-        textposition="top center",
-        textfont=dict(color="#1A1A2E", size=10),
+        marker=dict(size=7, line=dict(color="#FFFFFF", width=1.5)),
     )
     fig_line.update_layout(
         plot_bgcolor="#FFFFFF",
@@ -427,6 +421,12 @@ with col_right:
         title_font_color="#1A1A2E",
         xaxis=dict(gridcolor="#E0E0E0", linecolor="#CCCCCC", tickfont=dict(color="#1A1A2E")),
         yaxis=dict(gridcolor="#E0E0E0", tickfont=dict(color="#1A1A2E")),
+        legend=dict(
+            bgcolor="#F7F9FC",
+            bordercolor="#D0D8E4",
+            font=dict(color="#1A1A2E"),
+            title=dict(text="Genre"),
+        ),
         margin=dict(t=50, b=40),
     )
     st.plotly_chart(fig_line, use_container_width=True)
@@ -521,13 +521,13 @@ st.markdown("""
 <div class="insight-box">
     <strong>Finding 1 — Crime tops audience ratings, but barely.</strong>
     Crime leads with an 8.02 IMDB average, yet every major genre falls within a 0.12-point band (7.90–8.02).
-    High audience ratings are broadly distributed, not genre-specific. This finding excluded the Western genre that did not meet a minimum threshold of 5+ films to help ensure findings remain statistically significant.
+    High audience ratings are broadly distributed, not genre-specific.
 </div>
 
 <div class="insight-box">
     <strong>Finding 2 — Action earns 4× Drama's box office despite near-equal ratings.</strong>
     Action ($142M avg) and Drama ($38.7M avg) sit just 0.01 points apart on IMDB, yet the revenue gap is enormous.
-    Animation ($128M) similarly towers over critically admired genres like Crime and Mystery commercially. This finding similarly excluded the Family genre that did not meet the minimum 5+ films threshold.
+    Animation ($128M) similarly towers over critically admired genres like Crime and Mystery commercially.
 </div>
 
 <div class="insight-box">
