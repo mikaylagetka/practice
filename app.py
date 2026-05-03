@@ -393,11 +393,11 @@ with col_left:
 with col_right:
     # CHART 2: Average Gross by Decade per Genre (Multi-line Chart)
     decade_genre_data = (
-        df_filtered.dropna(subset=["Gross_USD"]),
-        groupby(["Decade", "Primary_Genre"]),
-        agg(Avg_Gross=("Gross_USD", "mean")),
-        reset_index(),
-        sort_values("Decade")
+        df_filtered.dropna(subset=["Gross_USD"])
+        .groupby(["Decade", "Primary_Genre"])
+        .agg(Avg_Gross=("Gross_USD", "mean"))
+        .reset_index()
+        .sort_values("Decade")
     )
     decade_genre_data["Avg_Gross_M"] = decade_genre_data["Avg_Gross"] / 1_000_000
 
