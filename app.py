@@ -432,15 +432,14 @@ with col_right:
     st.plotly_chart(fig_line, use_container_width=True)
 
 
-# CHART 3: Heatmap — Film Count by Genre and Decade (moved above scatter)
-st.markdown("#### Film Volume by Genre and Decade")
+# CHART 3: Heatmap — Avg IMDB Rating by Genre and Decade
+st.markdown("#### Average IMDB Rating by Genre and Decade")
 
 pivot_df = (
-    df_filtered.groupby(["Primary_Genre", "Decade"])
-    .size()
-    .reset_index(name="Count")
-    .pivot(index="Primary_Genre", columns="Decade", values="Count")
-    .fillna(0)
+    df_filtered.groupby(["Primary_Genre", "Decade"])["IMDB_Rating"]
+    .mean()
+    .reset_index(name="Avg_Rating")
+    .pivot(index="Primary_Genre", columns="Decade", values="Avg_Rating")
 )
 
 fig_heat = go.Figure(
@@ -456,14 +455,14 @@ fig_heat = go.Figure(
         ],
         showscale=True,
         hoverongaps=False,
-        hovertemplate="Genre: %{y}<br>Decade: %{x}<br>Films: %{z}<extra></extra>",
-        text=pivot_df.values.astype(int),
-        texttemplate="%{text}",
+        hovertemplate="Genre: %{y}<br>Decade: %{x}<br>Avg IMDB Rating: %{z:.2f}<extra></extra>",
+        text=pivot_df.values,
+        texttemplate="%{text:.2f}",
         textfont=dict(color="#1A1A2E", size=11),
     )
 )
 fig_heat.update_layout(
-    title="Number of Top-Rated Films by Genre and Decade",
+    title="Average IMDB Rating by Genre and Decade",
     title_font_color="#1A1A2E",
     plot_bgcolor="#FFFFFF",
     paper_bgcolor="#FFFFFF",
